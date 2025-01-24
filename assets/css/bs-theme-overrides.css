@@ -1,0 +1,6 @@
+:root, [data-bs-theme=light] {
+  --bs-body-font-size: 1.25rem;
+  --bs-body-font-weight: normal;
+  --bs-link-decoration: underline;
+}
+
