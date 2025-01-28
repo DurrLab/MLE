@@ -36,11 +36,11 @@
 // width weightings (one per diode) and the color channel that should
 // be used for auto exposure updates. For example:
 // 
-// {{{1.0f,0.8f,0.3f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f}, IMG_CHNL::MONO},
-//  {{1.0f,1.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f,0.f},   IMG_CHNL::RED}}};
+// {{{1.0f, 0.8f, 0.3f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f}, IMG_CHNL::MONO},
+//  {{1.0f, 1.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f, 0.f},   IMG_CHNL::RED}}};
 // 
 // For odd image fields, the program will assign relative pulse widths lengths of 100%,
-// 80%, and 30% to laser diodes 1-3,respectively, and the mean image intensity of all of
+// 80%, and 30% to laser diodes 1-3 respectively, and the mean image intensity of all of
 // the color channels will be used to compute updated pulse widths. For even image fields,
 // laser diodes 1-2 will use the same pulse width lengths, and the mean image intensity
 // of the red color channel will be used for auto exposure updates.
@@ -66,21 +66,19 @@
 // 639 nm	(high coherence)
 typedef std::vector<std::pair<std::vector<float>, IMG_CHNL>> prgrm;
 
-// typedef std::vector<unsigned short> pwstep;
-
-constexpr unsigned int		NO_LASER_DIODES			= 15;		// number of teensy laser diode channels
-constexpr unsigned int		NO_PHOTO_DIODES			= 3;		// number of teensy photodiode channels
-constexpr unsigned int		ROT_ANG_MAX				= 310;		// half wave plate rotation angle for maximum power (degs)
-constexpr unsigned int		ROT_ANG_MIN				= 265;		// half wave plate rotation angle for minimum power (degs)
-constexpr int				FID_RESET				= -1;		// frame id valuesent to reset the teensy
-constexpr int				FID_ERROR				= -2;		// frame id value sent by teensy indicating a runtime error
-constexpr unsigned char		MAX_IMG_INTENSITY		= 255;		// maximum intensity value of image (8 bit)
-constexpr unsigned char		TARGET_IMG_INTENSITY	= 128;		// target image intensity for autoexposure
-constexpr float				PW_MAX					= 14000;	// maximum allowed pulse width (microseconds)
-constexpr float				PW_LSCI					= 7000;		// pulse width length for high coherence laser in LSCI mode (microseconds)
-constexpr float				PWR_START				= 0.2;		// power laser diodes are initialized at
-constexpr float				PWR_MAX					= 1.0;		// maximum power value 
-constexpr float				PWR_MIN					= 0.01;		// minimum power value
+constexpr unsigned int 	NO_LASER_DIODES 		= 15;		// number of teensy laser diode channels
+constexpr unsigned int 	NO_PHOTO_DIODES 		= 3;		// number of teensy photodiode channels
+constexpr unsigned int 	ROT_ANG_MAX 			= 310;		// half wave plate rotation angle for maximum power (degs)
+constexpr unsigned int 	ROT_ANG_MIN 			= 265;		// half wave plate rotation angle for minimum power (degs)
+constexpr int 			FID_RESET 				= -1;		// frame id valuesent to reset the teensy
+constexpr int 			FID_ERROR 				= -2;		// frame id value sent by teensy indicating a runtime error
+constexpr unsigned char MAX_IMG_INTENSITY 		= 255;		// maximum intensity value of image (8 bit)
+constexpr unsigned char TARGET_IMG_INTENSITY 	= 128;		// target image intensity for autoexposure
+constexpr float 		PW_MAX 					= 14000;	// maximum allowed pulse width (microseconds)
+constexpr float 		PW_LSCI 				= 7000;		// pulse width length for high coherence laser in LSCI mode (microseconds)
+constexpr float 		PWR_START 				= 0.2;		// power laser diodes are initialized at
+constexpr float 		PWR_MAX 				= 1.0;		// maximum power value 
+constexpr float 		PWR_MIN 				= 0.01;		// minimum power value
 
 class LightController
 {

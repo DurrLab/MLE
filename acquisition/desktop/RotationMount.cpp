@@ -1,8 +1,8 @@
 /*********************************************************************************************/
 /*
- *	File name:		RotationMount.cpp
+ *  File name:      RotationMount.cpp
  *
- *	Taylor Bobrow, Johns Hopkins University (2025)
+ *  Taylor Bobrow, Johns Hopkins University (2025)
  *
  */
  /*********************************************************************************************/
@@ -19,9 +19,9 @@
 #include "Thorlabs.MotionControl.KCube.BrushlessMotor.h"
 
 RotationMount::RotationMount(const int serialNo)
-:   mSerialNo(serialNo),
-    mInitialized(0),
-    mPosition(0.f)
+: mSerialNo(serialNo),
+  mInitialized(0),
+  mPosition(0.f)
 {
     sprintf_s(mSerialNoStr, "%d", mSerialNo);
 }

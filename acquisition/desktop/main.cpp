@@ -199,7 +199,7 @@ int main(void)
         switch (cmd)
         {
             case '0': hookData.mCurrMode = MODE::OFF;           break;
-            case '1': hookData.mCurrMode = MODE::WLI;           break;
+            case '1': hookData.mCurrMode = MODE::WLE;           break;
             case '2': hookData.mCurrMode = MODE::PSE;           break;
             case '3': hookData.mCurrMode = MODE::LSCI;          break;
             case '4': hookData.mCurrMode = MODE::MULTI;         break;
@@ -308,7 +308,7 @@ MIL_INT MFTYPE PerFrameHookFunction(MIL_INT hookType, MIL_ID hookId, void* cbDat
     {
         // off: copy raw image
         case(MODE::OFF):
-        case(MODE::WLI):
+        case(MODE::WLE):
             cudaMemcpy(pData->mpFbExtDisp_dev, pData->mpFb_dev, pData->mpFrameGrbbr->GetSize(), cudaMemcpyDeviceToDevice);
             break;
 
@@ -320,7 +320,7 @@ MIL_INT MFTYPE PerFrameHookFunction(MIL_INT hookType, MIL_ID hookId, void* cbDat
                     pData->mpFrameGrbbr->GetNoBands());
             break;
 
-        // lsci: display only odd field (WLI)
+        // lsci: display only odd field (WLE)
         case(MODE::LSCI):
         case(MODE::SSFDI):
             cudaMemcpy(pData->mpFbExtDisp_dev, pData->mpFbOddField_dev, pData->mpFrameGrbbr->GetSize(), cudaMemcpyDeviceToDevice);
@@ -373,7 +373,7 @@ void PrintCliOptions(void)
 {
     std::cout << "-----Multimodal Laser Endoscopy-----" << std::endl;
     std::cout << "(0):  OFF" << std::endl;
-    std::cout << "(1):  WLI" << std::endl;
+    std::cout << "(1):  WLE" << std::endl;
     std::cout << "(2):  PSE" << std::endl;
     std::cout << "(3):  LSCI" << std::endl;
     std::cout << "(4):  MULTI" << std::endl;
@@ -395,7 +395,7 @@ void UpdateCliTitle(MODE currMode,
     switch (currMode)
     {
         case(MODE::OFF):    title += L"OFF";     break;
-        case(MODE::WLI):    title += L"WLI";     break;
+        case(MODE::WLE):    title += L"WLE";     break;
         case(MODE::PSE):    title += L"PSE";     break;
         case(MODE::LSCI):   title += L"LSCI";    break;
         case(MODE::MULTI):  title += L"MULTI";   break;

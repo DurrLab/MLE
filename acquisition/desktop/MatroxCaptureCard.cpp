@@ -1,11 +1,11 @@
 /*********************************************************************************************/
 /*
- *	File name:		MatroxCaptureCard.cpp
+ *  File name:        MatroxCaptureCard.cpp
  * 
- *	Taylor Bobrow, Johns Hopkins University (2025)
+ *  Taylor Bobrow, Johns Hopkins University (2025)
  *
  */
- /*********************************************************************************************/
+/*********************************************************************************************/
 
 #include "MatroxCaptureCard.h"
 
@@ -14,16 +14,16 @@
 #include "Logger.h"
 
 MatroxCaptureCard::MatroxCaptureCard(ROI roi, std::string outputDir, std::string pid, unsigned int fpv)
-:   mRoi(roi),
-    mFramesPerVideo(fpv),
-    mBaseVideoFilename(outputDir + pid + "-"),
-    mMilApp(0),
-    mMilSys(0),
-    mMilDig(0),
-    mMilDispMain(0),
-    mMilDispExt(0),
-    mNoArchivedFrames(0),
-    mFramesPerSecond(0)
+    : mRoi(roi),
+      mFramesPerVideo(fpv),
+      mBaseVideoFilename(outputDir + pid + "-"),
+      mMilApp(0),
+      mMilSys(0),
+      mMilDig(0),
+      mMilDispMain(0),
+      mMilDispExt(0),
+      mNoArchivedFrames(0),
+      mFramesPerSecond(0)
 {
     // allocate the default MIL system set in MIL Config
     MappAllocDefault(M_DEFAULT, &mMilApp, &mMilSys, M_NULL, &mMilDig, M_NULL);
@@ -135,10 +135,10 @@ void MatroxCaptureCard::CopyHostBuffToMilDisp(unsigned char* hostBuff, DISPLAY d
     // copy the host memory to the MIL-managed buffer for the selected display
     if (disp == DISPLAY::MAIN)
         MbufPutColor2d(mMilFbMainDispRoi, M_PACKED + M_BGR24, M_ALL_BANDS,
-            0, 0, mRoi.width, mRoi.height, hostBuff);
+                       0, 0, mRoi.width, mRoi.height, hostBuff);
     if (disp == DISPLAY::EXTERNAL)
         MbufPutColor2d(mMilFbExtDispRoi, M_PACKED + M_BGR24, M_ALL_BANDS,
-            0, 0, mRoi.width, mRoi.height, hostBuff);
+                       0, 0, mRoi.width, mRoi.height, hostBuff);
 }
 
 void MatroxCaptureCard::ArchiveFrame(MIL_ID hookId)
@@ -194,7 +194,7 @@ unsigned int MatroxCaptureCard::GetNoMissedFrames(void)
 
 void MatroxCaptureCard::OpenVideo(void)
 {
-    mCurrentVideoFilename = mBaseVideoFilename+std::to_string(mNoArchivedFrames/mFramesPerVideo)+".avi";
+    mCurrentVideoFilename = mBaseVideoFilename + std::to_string(mNoArchivedFrames / mFramesPerVideo) + ".avi";
 
     MbufExportSequence(std::wstring(mCurrentVideoFilename.begin(), mCurrentVideoFilename.end()).c_str(),
                         M_AVI_DIB, M_NULL, M_NULL, M_DEFAULT, M_OPEN);
@@ -206,7 +206,7 @@ void MatroxCaptureCard::OpenVideo(void)
 void MatroxCaptureCard::CloseVideo(void)
 {
     MbufExportSequence(std::wstring(mCurrentVideoFilename.begin(), mCurrentVideoFilename.end()).c_str(),
-                        M_DEFAULT,M_NULL, M_NULL, mFramesPerSecond, M_CLOSE);
+                        M_DEFAULT, M_NULL, M_NULL, mFramesPerSecond, M_CLOSE);
 
     Logger* pLogger = Logger::GetInstance();
     pLogger->Log("VIDEO\tClosed " + mCurrentVideoFilename);

@@ -18,7 +18,7 @@ typedef enum { ODD, EVEN }							IMG_FIELD;
 
 typedef enum { RED, GREEN, BLUE, MONO }				IMG_CHNL;
 
-typedef enum { OFF, WLI, PSE, LSCI,
+typedef enum { OFF, WLE, PSE, LSCI,
                MULTI, SSFDI, 
 			   WARMUP, SYNC }						MODE;
 
